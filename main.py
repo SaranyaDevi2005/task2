@@ -6,7 +6,8 @@ app = FastAPI()
 
 products = [
     {"id": 1, "name": "Laptop", "category": "Electronics", "price": 50000},
-    {"id": 2, "name": "Phone", "category": "Electronics", "price": 20000},]
+    {"id": 2, "name": "Phone", "category": "Electronics", "price": 20000},
+    {"id":3, "name": "Shirt", "category": "Clothing", "price": 1000}]
 
 
 @app.get("/products")
@@ -44,9 +45,11 @@ def delete_product(product_id: int):
 
 
 @app.patch("/products/{product_id}")
-def partial_update_product(product_id: int, updated_fields: dict):  
+def patch_product(product_id: int,updated_fields: dict):
     for product in products:
         if product["id"] == product_id:
             product.update(updated_fields)
-            return {"message": "Product partially updated successfully", "product": product}
-    return {"error": "Product not found"}
+            return {"message":"Product updated successfully", "product":product}
+        return {"error":"Product not found"}
+
+    
